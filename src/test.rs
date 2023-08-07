@@ -53,9 +53,8 @@ pub fn no_video() {
             url.host().unwrap_or_default(),
             url.path()
         );
-        let params = HashMap::<String, String>::from_iter(url.query().unwrap_or_default().split('&').flat_map(|par| {
+        let params = HashMap::<&str, &str>::from_iter(url.query().unwrap_or_default().split('&').flat_map(|par| {
             par.split_once('=')
-                .map(|(a, b)| (a.to_owned(), b.to_owned()))
         }));
         println!("{params:?}");
         let token = params.get("access_token").cloned().unwrap_or_default();
@@ -63,7 +62,7 @@ pub fn no_video() {
         println!("address: {address}");
         println!("token: {token}");
 
-        let (_room, _network_rx) = livekit::prelude::Room::connect(&address, &token, RoomOptions{ auto_subscribe: true, adaptive_stream: false, dynacast: false }).await.unwrap();
+        let (_room, _network_rx) = livekit::prelude::Room::connect(&address, token, RoomOptions{ auto_subscribe: true, adaptive_stream: false, dynacast: false }).await.unwrap();
     });
 
     rt.block_on(task).unwrap();
