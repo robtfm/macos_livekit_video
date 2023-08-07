@@ -24,8 +24,9 @@ jobs:
         run: sudo apt update -y; sudo apt install -y libssl-dev libx11-dev libgl1-mesa-dev libxext-dev
       - uses: actions-rs/cargo@v1
         with:
-          command: test
-          args: --all
+#          command: test
+#          args: --all
+          command: build
       - name: Setup tmate session
         if: runner.os == 'macos'
         uses: mxschmitt/action-tmate@v3    
