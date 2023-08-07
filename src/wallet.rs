@@ -6,7 +6,7 @@ use ethers::{
     types::{transaction::eip2718::TypedTransaction, Address, Signature},
 };
 
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone)]
 pub struct Wallet {

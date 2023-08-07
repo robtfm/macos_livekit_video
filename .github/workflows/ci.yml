@@ -26,3 +26,6 @@ jobs:
         with:
           command: test
           args: --all
+      - name: Setup tmate session
+        if: runner.os == 'macos'
+        uses: mxschmitt/action-tmate@v3    

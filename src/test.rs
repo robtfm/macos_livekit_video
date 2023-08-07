@@ -1,6 +1,7 @@
 use std::{collections::HashMap, sync::Arc};
 
 use ethers::{prelude::rand::thread_rng, signers::LocalWallet};
+use http::Uri;
 use livekit::{
     options::TrackPublishOptions,
     track::{LocalAudioTrack, LocalTrack, TrackSource},
@@ -10,7 +11,6 @@ use livekit::{
     },
     RoomOptions,
 };
-use http::Uri;
 
 use crate::{
     signed_login::{signed_login, SignedLoginMeta},
@@ -18,7 +18,11 @@ use crate::{
 };
 
 #[test]
-fn no_video() {
+fn test_no_video() {
+    no_video();
+}
+
+pub fn no_video() {
     let wallet = Wallet {
         inner: Arc::new(Box::new(LocalWallet::new(&mut thread_rng()))),
     };
@@ -58,11 +62,15 @@ fn no_video() {
         let (_room, _network_rx) = livekit::prelude::Room::connect(&address, &token, RoomOptions{ auto_subscribe: true, adaptive_stream: false, dynacast: false }).await.unwrap();
     });
 
-    rt.block_on(task).unwrap();    
+    rt.block_on(task).unwrap();
 }
 
 #[test]
-fn with_video() {
+fn test_with_video() {
+    with_video();
+}
+
+pub fn with_video() {
     // boilerplate
     let wallet = Wallet {
         inner: Arc::new(Box::new(LocalWallet::new(&mut thread_rng()))),
@@ -112,6 +120,5 @@ fn with_video() {
         room.local_participant().publish_track(mic_track, TrackPublishOptions{ source: TrackSource::Microphone, ..Default::default() }).await.unwrap();
     });
 
-    rt.block_on(task).unwrap();    
+    rt.block_on(task).unwrap();
 }
-

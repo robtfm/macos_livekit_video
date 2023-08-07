@@ -1,9 +1,10 @@
 pub mod signed_login;
+pub mod test;
 pub mod wallet;
-#[cfg(test)]
-mod test;
 
 fn main() {
-    println!("hello world!");
+    println!("running no_video");
+    test::no_video();
+    println!("running video");
+    test::with_video();
 }
-

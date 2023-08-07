@@ -1,6 +1,6 @@
-use surf::StatusCode;
-use http::Uri;
 use crate::wallet::{SimpleAuthChain, Wallet};
+use http::Uri;
+use surf::StatusCode;
 
 #[derive(Debug, serde::Deserialize)]
 pub struct SignedLoginResponse {
@@ -31,11 +31,7 @@ impl SignedLoginMeta {
     }
 }
 
-pub async fn signed_login(
-    uri: Uri,
-    wallet: Wallet,
-    meta: SignedLoginMeta,
-) -> SignedLoginResponse {
+pub async fn signed_login(uri: Uri, wallet: Wallet, meta: SignedLoginMeta) -> SignedLoginResponse {
     let unix_time = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
