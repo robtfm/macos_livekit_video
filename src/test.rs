@@ -1,6 +1,7 @@
 use std::{collections::HashMap, sync::Arc};
 
-use ethers::{prelude::rand::thread_rng, signers::LocalWallet};
+use ethers_signers::LocalWallet;
+use rand::thread_rng;
 use http::Uri;
 use livekit::{
     options::TrackPublishOptions,
@@ -58,6 +59,9 @@ pub fn no_video() {
         }));
         println!("{params:?}");
         let token = params.get("access_token").cloned().unwrap_or_default();
+
+        println!("address: {address}");
+        println!("token: {token}");
 
         let (_room, _network_rx) = livekit::prelude::Room::connect(&address, &token, RoomOptions{ auto_subscribe: true, adaptive_stream: false, dynacast: false }).await.unwrap();
     });

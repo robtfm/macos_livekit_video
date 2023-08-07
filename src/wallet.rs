@@ -1,10 +1,8 @@
 use std::sync::Arc;
 
 use async_trait::async_trait;
-use ethers::{
-    signers::{LocalWallet, Signer, WalletError},
-    types::{transaction::eip2718::TypedTransaction, Address, Signature},
-};
+use ethers_signers::{LocalWallet, Signer, WalletError};
+use ethers_core::types::{transaction::eip2718::TypedTransaction, Address, Signature};
 
 use serde::{Deserialize, Serialize};
 
