@@ -1,0 +1,28 @@
+
+on: [push]
+
+name: Continuous integration
+
+jobs:
+  test:
+    name: Test Suite
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - uses: Swatinem/rust-cache@v2
+      - name: install livekit deps (linux)
+        if: runner.os == 'linux'
+        run: sudo apt update -y; sudo apt install -y libssl-dev libx11-dev libgl1-mesa-dev libxext-dev
+      - uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --all
