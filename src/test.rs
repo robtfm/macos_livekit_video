@@ -124,4 +124,5 @@ pub fn with_video() {
     });
 
     rt.block_on(task).unwrap();
+    assert!(false);
 }
