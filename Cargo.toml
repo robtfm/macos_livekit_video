@@ -4,5 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-livekit = { version = "0.2.0", features=["rustls-tls-webpki-roots"] }
+livekit = { version = "0.2.0", features=["native-tls"] }
 tokio = { version = "1.29.1", features = ["rt"] }
